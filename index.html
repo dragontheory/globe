@@ -8,6 +8,26 @@
     <style>
       @import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200..800&display=swap');
 
+      @property --vp-range {
+        syntax: "<length>";
+        initial-value: 0;
+        inherits: true;
+      }
+
+      @property --fs-range {
+        syntax: "<length>";
+        initial-value: 0;
+        inherits: true;
+      }
+
+      :root {
+        /* upper and lower font scale bounds (global) */
+        --bound-lower: 20rem;
+        --bound-upper: 60rem;
+      }
+
+      /* MARK: RESET
+*/
       *,
       * *,
       *:before,
@@ -19,23 +39,36 @@
         margin: 0;
       }
 
-      :root {
-        color-scheme: light dark;
-
+      * {
         /* min and max font size */
         --fs-min: 1rem;
         --fs-max: 1rem;
 
-        --color-light: 255, 255, 255;
-        /* White (RGB channels) */
-        --color-dark: 0, 0, 0;
-        /* Black (RGB channels) */
-        --color-opacity: 0.8;
+        /* viewport and font size ranges */
+        --vp-range: calc(var(--bound-upper) - var(--bound-lower));
+        --fs-range: calc(var(--fs-max) - var(--fs-min));
 
-        color: light-dark(rgba(var(--color-dark), var(--color-opacity)),
-            rgba(var(--color-light), var(--color-opacity)));
+        /* numeric ranges */
+        --vp-num: tan(atan2(var(--vp-range), 1px));
+        --fs-num: tan(atan2(var(--fs-range), 1px));
+/*
+        @supports not (@property: --var) {
+          --vp-num: tan(atan2(var(--vp-range), 1rem));
+          --fs-num: tan(atan2(var(--fs-range), 1rem));
+        } */
+
+        /* divider (requires numeric values) */
+        --divider: calc(var(--vp-num) / var(--fs-num));
+
+        /* viewport and font size components for mid value */
+        --vw-comp: calc(100vw / var(--divider));
+        --fs-comp: calc(var(--fs-min) - (var(--bound-lower) / var(--divider)));
+
+        /* font size clamp */
+        font-size: clamp(var(--fs-min),
+          var(--vw-comp) + var(--fs-comp),
+          var(--fs-max));
       }
-
 
       html,
       body {
@@ -55,7 +88,7 @@
 
       .content {
         z-index: 10;
-        padding: 1rem;
+        padding: 20px;
         color: white;
         max-width: 85ch;
       }
@@ -67,9 +100,37 @@
       }
 
       p {
+        font-size: 1.1em;
         line-height: 1.6;
         margin-bottom: 1em;
       }
+
+
+
+      h1 {
+	--fs-min: 2rem;
+	--fs-max: 3.5rem;
+}
+
+h2 {
+	--fs-min: 1.5rem;
+	--fs-max: 2.5rem;
+}
+
+h1 + p {
+	--fs-min: 1.2rem;
+	--fs-max: 1.3rem;
+}
+
+p {
+	--fs-min: 1rem;
+	--fs-max: 1.1rem;
+}
+
+pre {
+	--fs-min: 0.8rem;
+	--fs-max: 1rem;
+}
     </style>
   </head>
 
