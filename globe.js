@@ -20,7 +20,7 @@ var style = document.createElement('style');
 style.textContent = `
   canvas {
     position: fixed;
-    top: 0; 
+    top: 0;
     left: -50%;
     width: ${height}px;
     height: ${height}px;
@@ -41,7 +41,7 @@ var path = d3.geo.path()
 // Try to load local world data, fallback to simple globe if not available
 d3.json("world-110m.json", function(error, topo) {
   var land, grid = graticule();
-  
+
   // Handle error or fallback for when external data is not available
   if (error) {
     console.log("World topology data unavailable, using optimized fallback mode for throttled networks");
@@ -56,7 +56,7 @@ d3.json("world-110m.json", function(error, topo) {
   var lastTime = 0;
   var targetFPS = 30; // Reduced from default ~60fps for better performance
   var frameInterval = 1000 / targetFPS;
-  
+
   function renderFrame() {
     var currentTime = Date.now();
     if (currentTime - lastTime < frameInterval) {
@@ -64,7 +64,7 @@ d3.json("world-110m.json", function(error, topo) {
       return;
     }
     lastTime = currentTime;
-    
+
     context.clearRect(0, 0, width, height);
 
     projection.rotate([speed * (currentTime - start), -15]).clipAngle(90);
@@ -106,10 +106,10 @@ d3.json("world-110m.json", function(error, topo) {
       context.strokeStyle = "transparent";
       context.stroke();
     }
-    
+
     requestAnimationFrame(renderFrame);
   }
-  
+
   // Start the animation
   requestAnimationFrame(renderFrame);
 });
@@ -120,15 +120,15 @@ window.addEventListener('resize', function() {
   if (newHeight !== height) {
     width = newHeight;
     height = newHeight;
-    
+
     canvas
       .attr("width", width)
       .attr("height", height);
-      
+
     projection
       .scale(height / 2.1)
       .translate([height / 2, height / 2]);
-    
+
     // Update canvas CSS
     var canvasElement = canvas.node();
     canvasElement.style.width = height + 'px';
