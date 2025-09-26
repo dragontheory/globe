@@ -1,58 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Globe Visualization</title>
     <style>
-        html, body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            overflow: hidden;
-            background-color: #000000;
-            font-family: Arial, sans-serif;
-        }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden;
+        background-color: #000000;
+        font-family: Arial, sans-serif;
+      }
 
-        main {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-        }
+      main {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+      }
 
-        .content {
-            position: relative;
-            z-index: 10;
-            padding: 20px;
-            color: white;
-            max-width: 50%;
-            margin-left: 50%;
-        }
+      .content {
+        position: relative;
+        z-index: 10;
+        padding: 20px;
+        color: white;
+        max-width: 50%;
+        margin-left: 50%;
+      }
 
-        h1 {
-            font-size: 2em;
-            margin-bottom: 1em;
-        }
+      h1 {
+        font-size: 2em;
+        margin-bottom: 1em;
+      }
 
-        p {
-            font-size: 1.1em;
-            line-height: 1.6;
-            margin-bottom: 1em;
-        }
+      p {
+        font-size: 1.1em;
+        line-height: 1.6;
+        margin-bottom: 1em;
+      }
     </style>
-</head>
-<body>
+  </head>
+
+  <body>
     <main>
-        <div class="content">
-            <h1>Globe Visualization</h1>
-            <p>This page displays a slowly spinning globe in the background, optimized for low-performance environments including virtual machines, throttled networks, and minimal hardware configurations.</p>
-            <p>The globe visualization uses D3.js and TopoJSON to render geographic data with smooth animations that work efficiently even on underpowered CPUs without GPU acceleration.</p>
-        </div>
+      <div class="content">
+        <h1>Globe Visualization</h1>
+        <p>This page displays a slowly spinning globe in the background, optimized for low-performance environments including virtual machines, throttled networks, and minimal hardware configurations.</p>
+        <p>The globe visualization uses D3.js and TopoJSON to render geographic data with smooth animations that work efficiently even on underpowered CPUs without GPU acceleration.</p>
+      </div>
     </main>
 
     <!-- Scripts loaded in order of dependency -->
     <script src="d3.v3.min.js"></script>
     <script src="topojson.v1.min.js"></script>
     <script src="globe.js"></script>
-</body>
+  </body>
+
 </html>
